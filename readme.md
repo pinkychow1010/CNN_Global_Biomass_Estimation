@@ -6,9 +6,11 @@ Forest biomass plays a crucial role in sustainable forest management and the glo
 
 This project leverages **Convolutional Neural Networks (CNNs)** to estimate **above-ground biomass density (AGBD)** at a global scale using Sentinel-2 imagery and GEDI LiDAR data. The CNN architecture is adapted from Nico Lang's model for canopy height mapping to predict biomass density. This project is part of the [ESA Natural Capital Kick-Start](https://business.esa.int/funding/invitation-to-tender/natural-capital) and the results have been published on [ICLR - 2024](https://ml-for-rs.github.io/iclr2024/) (Machine Learning for Remote Sensing) in Vienna.
 
-[<p align="center">
-  <img src="fig/paper_thumbnail.jpg" alt="paper" width="350"/>
-</p>](https://ml-for-rs.github.io/iclr2024/camera_ready/papers/45.pdf)
+<p align="center">
+  <a href="https://ml-for-rs.github.io/iclr2024/camera_ready/papers/45.pdf">
+    <img src="fig/paper_thumbnail.jpg" alt="paper" width="350"/>
+  </a>
+</p>
 
 ## 🛠 Methods
 
