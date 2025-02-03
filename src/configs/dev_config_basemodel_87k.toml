@@ -1,0 +1,126 @@
+# Config file for pipeline development with the mini dataset and the basemodel
+
+[dataset]
+path_train = "/home/pinkychow/biomass-estimation/data/biomass_dataset_train_87k.h5"
+
+[logging]
+logdir = "/home/pinkychow/biomass-estimation/training_logs"  # Tensorboard: copy log path; 'tensorboard --logdir path' to open tensorboard
+img_log_interval_train_batches = 500                         # At every n batches we plot a random sample to tensorboard to visualize progress
+img_log_interval_val_batches = 100
+log_rgb = true                                               # For this, the corresponding bands must be activated 
+log_worldcover = true                                        # For this, the worldcover must be used as feature
+
+[training]
+single_sample_debug = false # This disables the random cropping
+single_sample_debug_idx = 0
+batch_size = 32 #128 # try a small batch number: https://medium.com/geekculture/why-small-batch-sizes-lead-to-greater-generalization-in-deep-learning-a00a32251a4f
+epochs = 100000
+loss = "MaskedGaussianNLLLoss"
+output_variance = true         # Must be set to true for MaskedGaussianNLLLoss
+learning_rate = 1e-3
+weight_decay = 1e-3
+seed = 1 # set random seed
+cuda_deterministic_mode = true # slower but set true for real run https://pytorch.org/docs/stable/notes/randomness.html
+use_random_crop = true
+original_size = 32  # pixels
+crop_size = 16  # pixels
+in_channels = 26            # Must be adapted if features are disabled
+resample_scale = 2
+transform_mode = "default"
+redraw_thres = 5
+location_bootstrap = true
+agb_bootstrap = true
+landuse_bootstrap = true
+
+[training.lightning]
+log_every_n_batches = 50
+save_top_k = -1
+checkpoint_interval = 5
+early_stop = false
+model_remark = "model" # to be on checkpoint folder name
+fast_dev_run = false
+
+[training.features]
+# Here we specify the featues we want to use for training
+sentinel2.b02.use = true    # We want to use this feature
+sentinel2.b02.index = 1     # The feature has this index in the data array
+sentinel2.b02.mean = 468.31 # The dataset mean value for this feature
+sentinel2.b02.std = 377.9  # The dataset standard deviation value for this array
+
+sentinel2.b03.use = true
+sentinel2.b03.index = 2
+sentinel2.b03.mean = 725.86
+sentinel2.b03.std = 514.11
+
+sentinel2.b04.use = true
+sentinel2.b04.index = 3
+sentinel2.b04.mean = 801.86
+sentinel2.b04.std = 846.27
+
+sentinel2.b05.use = true
+sentinel2.b05.index = 4
+sentinel2.b05.mean = 1242.93
+sentinel2.b05.std = 819.08
+
+sentinel2.b06.use = true
+sentinel2.b06.index = 5
+sentinel2.b06.mean = 2249.38
+sentinel2.b06.std = 750.03
+
+sentinel2.b07.use = true
+sentinel2.b07.index = 6
+sentinel2.b07.mean = 2628.94
+sentinel2.b07.std = 850.2
+
+sentinel2.b08.use = true
+sentinel2.b08.index = 7
+sentinel2.b08.mean = 2724.25
+sentinel2.b08.std = 880.03
+
+sentinel2.b8a.use = true
+sentinel2.b8a.index = 8
+sentinel2.b8a.mean = 2878.07
+sentinel2.b8a.std = 867.91
+
+sentinel2.b09.use = true
+sentinel2.b09.index = 9
+sentinel2.b09.mean = 2884.21
+sentinel2.b09.std = 839.2
+
+sentinel2.b11.use = true
+sentinel2.b11.index = 10
+sentinel2.b11.mean = 2301.29
+sentinel2.b11.std = 1165.31
+
+sentinel2.b12.use = true
+sentinel2.b12.index = 11
+sentinel2.b12.mean = 1518.38
+sentinel2.b12.std = 1192.22
+
+sentinel2.ndvi.use = true
+sentinel2.ndvi.index = 12
+sentinel2.ndvi.mean = 0
+sentinel2.ndvi.std = 1
+
+sentinel2.lai.use = true
+sentinel2.lai.index = 13
+sentinel2.lai.mean = 0
+sentinel2.lai.std = 1
+
+sentinel2.ndwi.use = true
+sentinel2.ndwi.index = 14
+sentinel2.ndwi.mean = 0
+sentinel2.ndwi.std = 1
+
+copdem.altitude.use = false
+copdem.altitude.index = 0
+copdem.altitude.mean = 466.32
+copdem.altitude.std = 513.94
+
+copdem.slope.use = true
+copdem.slope.index = 1
+copdem.slope.mean = 4.96
+copdem.slope.std = 5.01
+
+worldcover.use = true
+xy.use = false

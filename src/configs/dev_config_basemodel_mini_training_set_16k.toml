@@ -1,0 +1,105 @@
+# Config file for pipeline development with the mini dataset and the basemodel
+
+[dataset]
+<<<<<<< HEAD
+path_train = "/home/pinkychow/biomass-estimation/mini_training_set/mini_training_set.h5"
+
+[logging]
+logdir = "/home/pinkychow/biomass-estimation/training_logs"
+=======
+path_train = "/Users/max/repos/biomass-estimation/mini_training_set/mini_training_set.h5"
+
+[logging]
+logdir = "/Users/max/repos/biomass-estimation/training_logs"
+>>>>>>> b08b0bd33175544a88c3be5c5592bf76d5e9a3ab
+img_log_interval_train_batches = 500                         # At every n batches we plot a random sample to tensorboard to visualize progress
+img_log_interval_val_batches = 100
+log_rgb = true                                               # For this, the corresponding bands must be activated 
+log_worldcover = true                                        # For this, the worldcover must be used as feature
+
+[training]
+single_sample_debug = false    # This disables the random cropping
+single_sample_debug_idx = 0
+batch_size = 128
+epochs = 100000
+loss = "MaskedGaussianNLLLoss"
+output_variance = true         # Must be set to true for MaskedGaussianNLLLoss
+learning_rate = 1e-3
+weight_decay = 1e-3
+seed = 1
+cuda_deterministic_mode = true # https://pytorch.org/docs/stable/notes/randomness.html
+use_random_crop = true
+crop_size = 16
+in_channels = 23
+
+[training.lightning]
+log_every_n_batches = 50
+
+[training.features]
+# Here we specify the featues we want to use for training
+sentinel2.b02.use = true    # We want to use this feature
+sentinel2.b02.index = 1     # The feature has this index in the data array
+sentinel2.b02.mean = 470.76 # The dataset mean value for this feature
+sentinel2.b02.std = 382.39  # The dataset standard deviation value for this array
+
+sentinel2.b03.use = true
+sentinel2.b03.index = 2
+sentinel2.b03.mean = 728.03
+sentinel2.b03.std = 515.7
+
+sentinel2.b04.use = true
+sentinel2.b04.index = 3
+sentinel2.b04.mean = 803.04
+sentinel2.b04.std = 841.29
+
+sentinel2.b05.use = true
+sentinel2.b05.index = 4
+sentinel2.b05.mean = 1242.84
+sentinel2.b05.std = 812.89
+
+sentinel2.b06.use = true
+sentinel2.b06.index = 5
+sentinel2.b06.mean = 2248.51
+sentinel2.b06.std = 748.04
+
+sentinel2.b07.use = true
+sentinel2.b07.index = 6
+sentinel2.b07.mean = 2628.53
+sentinel2.b07.std = 851.35
+
+sentinel2.b08.use = true
+sentinel2.b08.index = 7
+sentinel2.b08.mean = 2723.92
+sentinel2.b08.std = 880.22
+
+sentinel2.b8a.use = true
+sentinel2.b8a.index = 8
+sentinel2.b8a.mean = 2877.0
+sentinel2.b8a.std = 869.37
+
+sentinel2.b09.use = true
+sentinel2.b09.index = 9
+sentinel2.b09.mean = 2883.03
+sentinel2.b09.std = 839.88
+
+sentinel2.b11.use = true
+sentinel2.b11.index = 10
+sentinel2.b11.mean = 2299.68
+sentinel2.b11.std = 1154.12
+
+sentinel2.b12.use = true
+sentinel2.b12.index = 11
+sentinel2.b12.mean = 1519.18
+sentinel2.b12.std = 1182.27
+
+copdem.altitude.use = false
+copdem.altitude.index = 0
+copdem.altitude.mean = 469.8
+copdem.altitude.std = 518.72
+
+copdem.slope.use = true
+copdem.slope.index = 1
+copdem.slope.mean = 4.94
+copdem.slope.std = 5.0
+
+worldcover.use = true
