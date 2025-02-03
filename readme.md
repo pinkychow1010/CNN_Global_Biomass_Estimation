@@ -9,6 +9,10 @@ This project leverages Convolutional Neural Networks (CNNs) to estimate above-gr
 
 ## 🛠 Methods
 
+This project utilizes **PyTorch Lightning deep learning framework** for the CNN expereiments. The goal is to build an optimized model to **predict forest carbon stock worldwide from Sentinel-2 imagery**, based on GEDI Level 4 labels. It utilizes techniques such as bootscrapping, weighted sampling, and monte carlo dropout attempting to overcome common challenges such as saturation issues and imbalanced data. Some of the parameters are optimzied via grid search before running the predefined experiments, all set up in the configs to be initialized in the main script. The exploration of training data can be found in the Jupyter notebook. The data processing pipeline is visuzlized as follow:
+
+![pipeline](fig/data_pipeline.png)
+
 - **Data Collection:**
   - Over **2 million** globally distributed data points.
   - Sentinel-2 L2A spectral bands, GEDI Level 4 AGBD, ESA WorldCover, World Terrestrial Ecosystem (WTE), and CopDEM elevation data.
